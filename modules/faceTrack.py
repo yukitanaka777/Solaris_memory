@@ -3,7 +3,7 @@
 import cv2
 import os
 
-cascade_path = "/usr/local/opt/opencv/share/OpenCV/haarcascades/haarcascade_frontalface_alt.xml"
+cascade_path = "/usr/loal/opt/opencv/share/OpenCV/haarcascades/haarcascade_frontalface_alt.xml"
 
 def track(user):
 

@@ -10,25 +10,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-  code = request.args.get('code')
-  if(code):
-    #try:
-      token = getParam.token(code)
-      graph = facebook.GraphAPI(token)
-      resp = graph.get_object('me?fields=id,name,albums{name,photos},posts{picture}')
-      user = fileCon.generate_facebook_url(resp)
-      fileCon.download(user)
-      face.track(user)
-      #print fileCon.generate_facebook_url(resp)
+  return render_template('index.html')
 
-    #except:
-      print "error: Not get token or graph error"
-
-      return render_template('index.html')
-
-  else:
-    print "failed get code"
-    return render_template('index.html')
+@app.route('/takePicture')
+def takePicture():
+  return render_template('takePicture.html')
 
 @app.route('/getCode',methods=['POST','GET'])
 def getCode():
@@ -39,6 +25,29 @@ def getCode():
     url = getParam.code()
     return redirect(url) 
 
+@app.route('/callback')
+def Fbcallback():
+  code = request.args.get('code')
+  if(code):
+    try:
+      token = getParam.token(code)
+      graph = facebook.GraphAPI(token)
+      resp = graph.get_object('me?fields=id,name,email,friends,picture')
+      #resp = graph.get_object('me?fields=id,name,albums{name,photos},posts{picture}')
+      #user = fileCon.generate_facebook_url(resp)
+      #fileCon.download(user)
+      #face.track(user)
+      #print fileCon.generate_facebook_url(resp)
+      print resp
+    except:
+      print "error: Not get token or graph error"
+
+    return render_template('callback.html')
+
+  else:
+    print "failed get code"
+    return render_template('callback.html')
+
 if __name__ == '__main__':
-  app.debug = True
-  app.run(host='localhost')
+  #app.debug = True
+  app.run(host='0.0.0.0')

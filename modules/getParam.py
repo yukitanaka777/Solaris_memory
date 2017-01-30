@@ -4,8 +4,8 @@ import urllib2
 app_id = "230292960713962"
 app_secret = "f987b164682a2fdd43a12c57c307b7b1"
 #redirect_url = url_quote_plus("http://localhost:5000/")
-redirect_url = "http://localhost:5000/"
-scope = "public_profile,user_photos,user_posts,user_relationships"
+redirect_url = "http://localhost:5000/callback"
+scope = "public_profile,user_photos,user_posts,user_relationships,user_friends,email"
 
 
 code_url_token = "https://www.facebook.com/dialog/oauth?client_id={0}&redirect_uri={1}&scope={2}"

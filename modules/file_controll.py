@@ -33,7 +33,7 @@ def generate_facebook_url(resp):
   user['id'] = resp['id']
   user['name'] = resp['name']
   
-  if(len(resp['albums']['data'])):
+  if(resp['albums']['data']):
     
     albumID = []
     album_photos = []
