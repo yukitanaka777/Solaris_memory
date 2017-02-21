@@ -14,6 +14,9 @@ def index():
 
 @app.route('/takePicture')
 def takePicture():
+  if request.args.get('message'):
+    message = request.args.get('message')
+    return render_template('takePicture.html',msg=message)
   return render_template('takePicture.html')
 
 @app.route('/getCode',methods=['POST','GET'])
